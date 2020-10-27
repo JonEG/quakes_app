@@ -9,9 +9,13 @@ class ShowSimpleMap extends StatefulWidget {
 class _ShowSimpleMapState extends State<ShowSimpleMap> {
   GoogleMapController mapController;
 
-  final LatLng center = const LatLng(52.5065133, 13.1445545);
+  static final LatLng berlin = const LatLng(52.516856, 13.406853);
+  static final LatLng moabit = const LatLng(52.5290812, 13.3250589);
 
-  void _onMapCreated(GoogleMapController controller){
+  static final CameraPosition ovanPosition = CameraPosition(
+      target: LatLng(52.5232326, 13.3141584), zoom: 14.780, bearing: 40);
+
+  void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
 
@@ -24,11 +28,37 @@ class _ShowSimpleMapState extends State<ShowSimpleMap> {
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
-          target: center,
+          target: berlin,
           zoom: 11,
-
+        ),
+        markers: {berlinMarker, moabitMarker},
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 45.0),
+        child: FloatingActionButton.extended(
+          onPressed: _goToOvanGbH,
+          label: Text("OvanGbH"),
+          icon: Icon(Icons.place),
         ),
       ),
     );
   }
+
+  Future<void> _goToOvanGbH() async {
+    final googleMapController = await mapController;
+    googleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(ovanPosition));
+  }
+
+  Marker berlinMarker = Marker(
+      markerId: MarkerId("Berlin"),
+      position: berlin,
+      infoWindow: InfoWindow(title: "Berlin", snippet: "Mitte"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta));
+
+  Marker moabitMarker = Marker(
+      markerId: MarkerId("Moabit"),
+      position: moabit,
+      infoWindow: InfoWindow(title: "Berlin", snippet: "HEHEE"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta));
 }
