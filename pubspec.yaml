@@ -28,6 +28,13 @@ dependencies:
   # A Flutter plugin that provides a Google Maps widget.
   google_maps_flutter: ^1.0.3
 
+  # Customizable Icons for Flutter developers.
+  # View gallery built with Flutter Web: https://pd4d10.github.io/flutter-vector-icons/
+  flutter_vector_icons: ^0.2.1
+
+  # A composable, Future-based library for making HTTP requests.
+  http: ^0.12.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
