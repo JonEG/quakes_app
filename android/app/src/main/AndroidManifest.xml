@@ -9,6 +9,10 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="quakes_app"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="AIzaSyAX8Ks1xVx3vbPa1o3_PLCUMp6LMcBf17Q"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
