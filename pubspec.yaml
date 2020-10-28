@@ -28,6 +28,11 @@ dependencies:
   # A Flutter plugin that provides a Google Maps widget.
   google_maps_flutter: ^1.0.3
 
+  # A Dart library for implementing geodesic and trigonometric calculations
+  # based on a spherical Earth model for working with points and paths such as distances,
+  # bearings and destinations
+  geodesy: ^0.3.2
+
   # Customizable Icons for Flutter developers.
   # View gallery built with Flutter Web: https://pd4d10.github.io/flutter-vector-icons/
   flutter_vector_icons: ^0.2.1
