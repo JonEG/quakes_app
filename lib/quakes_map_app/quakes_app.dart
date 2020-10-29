@@ -80,21 +80,25 @@ class _QuakesAppState extends State<QuakesApp> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: GoogleMap(
-        mapType: MapType.normal,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        initialCameraPosition: CameraPosition(
-            target: dartLatMiddlePoint, zoom: _zoomVal),
-        markers: Set<Marker>.of(_markerList),
-      ),
+          mapType: MapType.normal,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+          initialCameraPosition:
+              CameraPosition(target: dartLatMiddlePoint, zoom: 0.0),
+          markers: Set<Marker>.of(_markerList),
+          onCameraMove: (CameraPosition position) {
+            setState(() {
+              dartLatMiddlePoint = position.target;
+            });
+          }),
     );
   }
 
   findQuakes() {
     setState(() {
       _markerList.clear();
-      _handleResponse();
+      //_handleResponse();
     });
   }
 
@@ -119,24 +123,8 @@ class _QuakesAppState extends State<QuakesApp> {
 
   Future<void> _updateZoom(double zoomVal) async {
     final GoogleMapController controller = await _controller.future;
-    controller.getVisibleRegion().then((value) {
-      //GET MAP CENTER
-      MyGeodesy.LatLng l1 =
-          MyGeodesy.LatLng(value.northeast.latitude, value.northeast.longitude);
-      MyGeodesy.LatLng l2 =
-          MyGeodesy.LatLng(value.southwest.latitude, value.southwest.longitude);
-      var geoLatMiddlePoint =
-          MyGeodesy.Geodesy().midPointBetweenTwoGeoPoints(l1, l2);
-      setState(() {
-        dartLatMiddlePoint =
-            LatLng(geoLatMiddlePoint.latitude, geoLatMiddlePoint.longitude);
-        print("CAMERA SHOULD GO: $dartLatMiddlePoint");
-      });
 
-      //CAMERA ZOOMS
-      print("CAMERA GOES: $dartLatMiddlePoint");
       controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(target: dartLatMiddlePoint, zoom: zoomVal)));
-    });
+          CameraPosition(target: dartLatMiddlePoint, zoom: _zoomVal)));
   }
 }
