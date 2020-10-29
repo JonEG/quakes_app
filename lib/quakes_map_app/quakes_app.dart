@@ -98,7 +98,7 @@ class _QuakesAppState extends State<QuakesApp> {
   findQuakes() {
     setState(() {
       _markerList.clear();
-      //_handleResponse();
+      _handleResponse();
     });
   }
 
@@ -109,7 +109,7 @@ class _QuakesAppState extends State<QuakesApp> {
               _markerList.add(Marker(
                   markerId: MarkerId(element.id),
                   infoWindow: InfoWindow(
-                      title: element.properties.mag.toString(),
+                      title: "MAGNITUDE: "+element.properties.mag.toString(),
                       snippet: element.properties.title),
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueRed),

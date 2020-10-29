@@ -117,7 +117,7 @@ class Properties {
   int felt;
   double cdi;
   double mmi;
-  double alert;
+  String alert;
   String status;
   int tsunami;
   int sig;
@@ -173,7 +173,7 @@ class Properties {
     felt = json['felt'];
     cdi = TypesHelper.toDouble(json['cdi']);
     mmi = TypesHelper.toDouble(json['mmi']);
-    alert = TypesHelper.toDouble(json['alert']);
+    alert = json['alert'];
     status = json['status'];
     tsunami = json['tsunami'];
     sig = json['sig'];

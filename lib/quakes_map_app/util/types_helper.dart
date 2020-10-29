@@ -11,23 +11,23 @@ class TypesHelper {
         return val.toInt();
       }
     }catch(error){
-      debugPrint(error);
+      print(error);
       return 0;
     }
   }
 
   static toDouble(num val){
-    try{
-      if(val == null){
+    try {
+      if (val == null) {
         return 0.0;
-      }else if(val is double){
+      } else if (val is double) {
         return val;
-      }else{
+      } else {
         return val.toDouble();
       }
 
-    }catch(error){
-      debugPrint(error);
+    }catch(exception){
+      print("ERROR: $exception");
       return 0.0;
     }
   }
